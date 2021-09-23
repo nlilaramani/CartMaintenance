@@ -16,6 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -25,6 +26,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @EnableBinding(value={Sink.class})
 @EnableRedisRepositories() 
 public class Application {
+      @Bean
+   public RestTemplate restTemplate() {
+     return new RestTemplate();
+   }
     	@Autowired 
         private ProductCache cache;
         @StreamListener(Sink.INPUT)
